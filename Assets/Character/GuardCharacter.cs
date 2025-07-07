@@ -70,9 +70,11 @@ public class GuardCharacter : MonoBehaviour
 				//‘Ì—Í‚ðŒ¸‚ç‚·
 				characterScript.HitDamege(m_attackDamage);
 				m_attackCooolDown = AttackCooolDown;
-
-				anim.SetTrigger("Idle");
 			}
+		}
+		else
+		{
+			anim.SetTrigger("Idle");
 		}
 	}
 }

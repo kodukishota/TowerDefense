@@ -25,8 +25,6 @@ public class InfantryCharacter : MonoBehaviour
 	bool m_canAttack;           //“G‚ğUŒ‚‚·‚é‚±‚Æ‚ª‚Å‚«‚é‚©
 	float m_attackCooolDown;    //UŒ‚‘¬“x
 
-	bool m_isIdle;
-
 	GameObject m_enemy;
 
 	void Start()
@@ -50,8 +48,6 @@ public class InfantryCharacter : MonoBehaviour
 			anim.SetTrigger("Walk");
 
 			navMeshAgent.speed = Speed;
-
-			m_isIdle = false;
 		}
 		else
 		{
@@ -65,12 +61,6 @@ public class InfantryCharacter : MonoBehaviour
 			if(m_canAttack)
 			{
 				AttackEnemy(m_enemy);
-
-				if(!m_isIdle)
-				{
-					anim.SetTrigger("Idle");
-					m_isIdle = true;
-				}
 			}
 		}
 	}
@@ -97,9 +87,11 @@ public class InfantryCharacter : MonoBehaviour
 				//‘Ì—Í‚ğŒ¸‚ç‚·
 				characterScript.HitDamege(m_attackDamage);
 				m_attackCooolDown = AttackCooolDown;
-
-				anim.SetTrigger("Idle");
 			}
+		}
+		else
+		{
+			anim.SetTrigger("Idle");
 		}
 	}
 }

@@ -9,12 +9,13 @@ public class CharacterScript : MonoBehaviour
 	[SerializeField] private Animator anim;
 	//static int MaxHp = 10;				//Å‘å‘Ì—Í
 
-	[SerializeField] int m_hp;				//‘Ì—Í
-	GameObject m_enemy;
+	[SerializeField] int m_hp;              //‘Ì—Í
+
+	bool m_isDeth;
 
 	void Start()
 	{
-
+		m_isDeth = false;
 	}
 
 	void Update()
@@ -24,8 +25,12 @@ public class CharacterScript : MonoBehaviour
 		{
 			gameObject.tag = "Carcass";
 
-			anim.SetTrigger("Deth");
+			if (!m_isDeth)
+			{
+				anim.SetTrigger("Deth");
 
+				m_isDeth = true;
+			}
 			Invoke("Deth", 2.0f);
 		}
 	}
