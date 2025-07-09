@@ -7,6 +7,13 @@ public class SearchEnemy : MonoBehaviour
 	bool m_findEnemy = false; 
 	GameObject m_enemy;
 
+	[SerializeField] private CharacterScript m_characterScript;
+
+	private void Start()
+	{
+		m_characterScript.SetSearchEnemy(this);
+	}
+
 	public bool GetFindEnemy()
 	{
 		return m_findEnemy;

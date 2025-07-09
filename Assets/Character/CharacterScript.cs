@@ -11,7 +11,41 @@ public class CharacterScript : MonoBehaviour
 
 	[SerializeField] int m_hp;              //‘Ì—Í
 
+	GameObject m_enemyCastle;
+	private SearchEnemy m_searchEnemy;
+	private CanAttackEnemy m_canAttackEnemy;
+	
 	bool m_isDeth;
+
+	public void SetSearchEnemy(SearchEnemy searchEnemy)
+	{
+		m_searchEnemy = searchEnemy;
+	}
+
+	public void SetCanAttackEnemy(CanAttackEnemy canAttackEnemy)
+	{
+		m_canAttackEnemy = canAttackEnemy;
+	}
+
+	public void SetEnemyCastle(GameObject enemyCastle)
+	{
+		m_enemyCastle = enemyCastle;
+	}
+
+	public SearchEnemy GetSearchEnemy()
+	{
+		return m_searchEnemy;
+	}
+
+	public CanAttackEnemy GetCanAttackEnemy()
+	{
+		return m_canAttackEnemy;
+	}
+
+	public GameObject GetenemyCastle()
+	{
+		return m_enemyCastle;
+	}
 
 	void Start()
 	{

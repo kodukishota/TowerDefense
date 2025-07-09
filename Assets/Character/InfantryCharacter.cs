@@ -6,13 +6,14 @@ using UnityEngine.AI;
 
 public class InfantryCharacter : MonoBehaviour
 {
-	[SerializeField] GameObject enemyCastle;
 	[SerializeField] private Animator anim;
+	[SerializeField] private CharacterScript m_characterScript;
 
 	[SerializeField] private NavMeshAgent navMeshAgent;
 
-	[SerializeField] private SearchEnemy searchEnemy;
-	[SerializeField] private CanAttackEnemy canAttackEnemy;
+	private GameObject m_enemyCastle;
+	private SearchEnemy m_searchEnemy;
+	private CanAttackEnemy m_canAttackEnemy;
 
 	static int Speed = 4;               //ë´ÇÃë¨Ç≥
 	static int AttackDamage = 5;        //çUåÇóÕ
@@ -32,18 +33,24 @@ public class InfantryCharacter : MonoBehaviour
 		navMeshAgent.speed = Speed;
 
 		m_attackDamage = AttackDamage;
+		m_findEnemy = false;
 		m_canAttack = false;
+
+		m_enemyCastle = m_characterScript.GetenemyCastle();
 	}
 
 	void Update()
 	{
-		m_findEnemy = searchEnemy.GetFindEnemy();
-		m_canAttack = canAttackEnemy.GetCanAttack();
+		m_searchEnemy = m_characterScript.GetSearchEnemy();
+		m_canAttackEnemy = m_characterScript.GetCanAttackEnemy();
+
+		m_findEnemy = m_searchEnemy.GetFindEnemy();
+		m_canAttack = m_canAttackEnemy.GetCanAttack();
 
 		//ìGÇå©Ç¬ÇØÇΩÇÁìGÇÃÇŸÇ§Ç÷çsÇ≠
 		if (!m_findEnemy)
 		{
-			navMeshAgent.SetDestination(enemyCastle.transform.position);
+			navMeshAgent.SetDestination(m_enemyCastle.transform.position);
 
 			anim.SetTrigger("Walk");
 
@@ -51,7 +58,7 @@ public class InfantryCharacter : MonoBehaviour
 		}
 		else
 		{
-			m_enemy = searchEnemy.GetEnemy();
+			m_enemy = m_searchEnemy.GetEnemy();
 
 			navMeshAgent.SetDestination(m_enemy.transform.position);
 		}
@@ -74,8 +81,6 @@ public class InfantryCharacter : MonoBehaviour
 		navMeshAgent.speed = 0;
 
 		CharacterScript characterScript = fightEnemy.GetComponent<CharacterScript>();
-
-		Debug.Log(m_attackCooolDown);
 
 		if (m_attackCooolDown <= 0)
 		{

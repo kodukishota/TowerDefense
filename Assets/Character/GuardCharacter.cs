@@ -6,9 +6,10 @@ using UnityEngine.AI;
 public class GuardCharacter : MonoBehaviour
 {
 	[SerializeField] private Animator anim;
+	[SerializeField] private CharacterScript m_characterScript;
 
-	[SerializeField] private SearchEnemy searchEnemy;
-	[SerializeField] private CanAttackEnemy canAttackEnemy;
+	private SearchEnemy m_searchEnemy;
+	private CanAttackEnemy m_canAttackEnemy;
 
 	static int AttackDamage = 10;        //UŒ‚—Í
 	[SerializeField] float AttackCooolDown = 6; //UŒ‚‘¬“x•b”
@@ -29,8 +30,11 @@ public class GuardCharacter : MonoBehaviour
 
 	void Update()
 	{
-		m_findEnemy = searchEnemy.GetFindEnemy();
-		m_enemy = searchEnemy.GetEnemy();
+		m_searchEnemy = m_characterScript.GetSearchEnemy();
+		m_canAttackEnemy = m_characterScript.GetCanAttackEnemy();
+
+		m_findEnemy = m_searchEnemy.GetFindEnemy();
+		m_enemy = m_searchEnemy.GetEnemy();
 
 		//“G‚ğŒ©‚Â‚¯‚½‚ç“G‚Ì‚Ù‚¤‚Ös‚­
 		if (!m_findEnemy)
@@ -39,7 +43,7 @@ public class GuardCharacter : MonoBehaviour
 		}
 		else
 		{
-			m_canAttack = canAttackEnemy.GetCanAttack();
+			m_canAttack = m_canAttackEnemy.GetCanAttack();
 		}
 
 		if (m_enemy != null)
@@ -57,8 +61,6 @@ public class GuardCharacter : MonoBehaviour
 		m_attackCooolDown -= Time.deltaTime;
 
 		CharacterScript characterScript = fightEnemy.GetComponent<CharacterScript>();
-
-		//Debug.Log(m_attackCooolDown);
 
 		if (m_attackCooolDown <= 0)
 		{

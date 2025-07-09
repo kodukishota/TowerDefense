@@ -6,6 +6,13 @@ public class CanAttackEnemy : MonoBehaviour
 {
 	bool m_canAttack = false;
 
+	[SerializeField] private CharacterScript m_characterScript;
+
+	private void Start()
+	{
+		m_characterScript.SetCanAttackEnemy(this);
+	}
+
 	public bool GetCanAttack()
 	{
 		return m_canAttack;

@@ -7,19 +7,21 @@ using static UnityEngine.GraphicsBuffer;
 
 public class RangedInfantry : MonoBehaviour
 {
-	[SerializeField] GameObject enemyCastle;
+	
 	[SerializeField] private Animator anim;
+	[SerializeField] private CharacterScript m_characterScript;
 
 	[SerializeField] private NavMeshAgent navMeshAgent;
-
-	[SerializeField] private SearchEnemy searchEnemy;
-	[SerializeField] private CanAttackEnemy canAttackEnemy;
 
 	[SerializeField] private GameObject projectilePrefab;		//矢だったり魔法などのオブジェクト
 
 	static int Speed = 4;               //足の速さ
 	static int AttackDamage = 5;        //攻撃力
 	[SerializeField] float AttackCooolDown = 5; //攻撃速度
+
+	private GameObject m_enemyCastle;
+	private SearchEnemy m_searchEnemy;
+	private CanAttackEnemy m_canAttackEnemy;
 
 	bool m_findEnemy;       //敵を見つけたか
 
@@ -47,18 +49,22 @@ public class RangedInfantry : MonoBehaviour
 
 		m_attackDamage = AttackDamage;
 		m_canAttack = false;
+
+		m_enemyCastle = m_characterScript.GetenemyCastle();
 	}
 
 	void Update()
 	{
-		m_findEnemy = searchEnemy.GetFindEnemy();
-		m_canAttack = canAttackEnemy.GetCanAttack();
-		m_enemy = searchEnemy.GetEnemy();
+		m_searchEnemy = m_characterScript.GetSearchEnemy();
+		m_canAttackEnemy = m_characterScript.GetCanAttackEnemy();
+
+		m_findEnemy = m_searchEnemy.GetFindEnemy();
+		m_canAttack = m_canAttackEnemy.GetCanAttack();
 
 		//敵を見つけたら敵のほうへ行く
 		if (!m_findEnemy)
 		{
-			navMeshAgent.SetDestination(enemyCastle.transform.position);
+			navMeshAgent.SetDestination(m_enemyCastle.transform.position);
 
 			anim.SetTrigger("Walk");
 
@@ -68,6 +74,8 @@ public class RangedInfantry : MonoBehaviour
 		}
 		else
 		{
+			m_enemy = m_searchEnemy.GetEnemy();
+
 			navMeshAgent.SetDestination(m_enemy.transform.position);
 		}
 
@@ -97,8 +105,6 @@ public class RangedInfantry : MonoBehaviour
 
 		CharacterScript characterScript = fightEnemy.GetComponent<CharacterScript>();
 
-		Debug.Log(m_attackCooolDown);
-
 		if (m_attackCooolDown <= 0)
 		{
 			//攻撃アニメーションを再生
@@ -115,7 +121,7 @@ public class RangedInfantry : MonoBehaviour
 				Projectile projectile = m_projectile.GetComponent<Projectile>();
 
 				projectile.SetRangedInfantry(this);
-				projectile.SetSearchEnemy(searchEnemy);
+				projectile.SetSearchEnemy(m_searchEnemy);
 
 				m_isCreated = true;
 			}

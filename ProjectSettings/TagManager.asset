@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Carcass
+  - Bule
+  - Red
   layers:
   - Default
   - TransparentFX
