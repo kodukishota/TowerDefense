@@ -31,6 +31,7 @@ public class Projectile : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
+		//“G‚É“–‚½‚Á‚½‚ç“–‚½‚Á‚½‚Æ•Ô‚·
 		if(other.gameObject.CompareTag("Enemy"))
 		{
 			m_rangedInfantry.SetHitEnemy();

@@ -25,11 +25,6 @@ public class InstantiateCharacter : MonoBehaviour
 		m_onClick = false;
 	}
 
-	public int GetCost()
-	{
-		return m_costMoney;
-	}
-
 	public void OnClick()
 	{
 		m_onClick = true;
@@ -43,16 +38,25 @@ public class InstantiateCharacter : MonoBehaviour
 	//キャラクタの生成
 	public void Instantiate(Vector3 position)
 	{
-		GameObject character = Instantiate(m_character, position, Quaternion.Euler(0,-90,0));
+		//お金があったら出せる
+		if(m_walletScript.GetHaveMoney() >= m_costMoney)
+		{
+			GameObject character = Instantiate(m_character, position, Quaternion.Euler(0,-90,0));
 
-		CharacterScript characterScript = character.GetComponent<CharacterScript>();
+			CharacterScript characterScript = character.GetComponent<CharacterScript>();
 
-		characterScript.SetEnemyCastle(m_enemyCastle);
+			characterScript.SetEnemyCastle(m_enemyCastle);
 
-		character.tag = "Bule";
+			character.tag = "Bule";
 
-		m_walletScript.UseMoney(m_costMoney);
+			m_walletScript.UseMoney(m_costMoney);
 
-		m_onClick = false;
+			m_onClick = false;
+		}
+		//なかったら
+		else
+		{
+
+		}
 	}
 }

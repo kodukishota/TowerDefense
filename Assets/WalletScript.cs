@@ -42,4 +42,9 @@ public class WalletScript : MonoBehaviour
 	{
 		m_haveMoney -= useMoney;
 	}
+
+	public int GetHaveMoney()
+	{
+		return m_haveMoney;
+	}
 }
