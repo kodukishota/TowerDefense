@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "CharacterDataBase")]
 public class CharacterDataBase : ScriptableObject
 {
-	public CharacterDataBase[] datas;
+	public List<CharacterData> datas;
 }
 
 [System.Serializable]
@@ -14,4 +15,5 @@ public class CharacterData
 	int hp;
 	int attackDamage;
 	int speed;
+	int cost;
 }

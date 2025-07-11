@@ -32,7 +32,7 @@ public class InfantryCharacter : MonoBehaviour
 	{
 		navMeshAgent.speed = Speed;
 
-		m_attackDamage = AttackDamage;
+		m_attackDamage = m_characterScript.GetAtk();
 		m_findEnemy = false;
 		m_canAttack = false;
 

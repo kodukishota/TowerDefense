@@ -11,11 +11,31 @@ public class CharacterScript : MonoBehaviour
 
 	[SerializeField] int m_hp;              //‘Ì—Í
 
+	int m_atk;
+	int m_cost;
+
 	GameObject m_enemyCastle;
 	private SearchEnemy m_searchEnemy;
 	private CanAttackEnemy m_canAttackEnemy;
 	
 	bool m_isDeth;
+
+	public void SetStatus(int hp,int atk,int cost)
+	{
+		m_hp = hp;
+		m_atk = atk;
+		m_cost = cost;
+	}
+
+	public int GetAtk()
+	{
+		return m_atk;
+	}
+
+	public int GetCost()
+	{
+		return m_cost;
+	}
 
 	public void SetSearchEnemy(SearchEnemy searchEnemy)
 	{
