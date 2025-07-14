@@ -31,5 +31,7 @@ public class HttpRequest
 
 		Debug.Log(url + ": " + unityWebRequest.downloadHandler.text);
 		yield return unityWebRequest.downloadHandler.text;
+
+		unityWebRequest.Dispose();
 	}
 }

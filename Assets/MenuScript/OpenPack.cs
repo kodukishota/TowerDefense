@@ -1,13 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class OpenPack : MonoBehaviour
 {
-	[SerializeField] InputField userId;
+	[SerializeField] TMP_InputField userId;
 
 	[SerializeField] PackCardView packCardView;
+
+	[SerializeField] TextMeshProUGUI gemText;
+	[SerializeField] TextMeshProUGUI goldText;
 
 	[SerializeField] int count;
 	[SerializeField] int goldOrGem;
@@ -15,8 +22,15 @@ public class OpenPack : MonoBehaviour
 	[System.Serializable]
 	class Result
 	{
-		public List<int> card_ids;
+		public List<int> character_ids;
 	}
+
+	class UserResult
+	{
+		public int gold;
+		public int gem;
+	}
+
 
 	public void OnClick()
 	{
@@ -25,6 +39,7 @@ public class OpenPack : MonoBehaviour
 
 	IEnumerator Request()
 	{
+		//パックを引く
 		IEnumerator coroutine = HttpRequest.PostRequest(
 			"open_pack.php",
 			new Dictionary<string, string>(){
@@ -35,6 +50,20 @@ public class OpenPack : MonoBehaviour
 		yield return StartCoroutine(coroutine);
 		var result = JsonUtility.FromJson<Result>((string)coroutine.Current);
 
-		Debug.Log(result.card_ids);
+		packCardView.Reset();
+		packCardView.Add(result.character_ids);
+
+		//ガチャ引いた後にゴールドや石を反映させる
+		IEnumerator userCoroutine = HttpRequest.PostRequest(
+			"get_user_info.php",
+			new Dictionary<string, string>()
+			{
+				{"user_id", userId.text }
+			});
+		yield return StartCoroutine(userCoroutine);
+		var userResult = JsonUtility.FromJson<UserResult>((string)userCoroutine.Current);
+
+		goldText.text = userResult.gold.ToString();
+		gemText.text = userResult.gem.ToString();
 	}
 }

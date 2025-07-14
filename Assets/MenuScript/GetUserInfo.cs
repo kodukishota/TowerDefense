@@ -43,10 +43,10 @@ public class GetUserInfo : MonoBehaviour
 
 		Debug.Log(result.name);
 
-		displayUesrName.text += result.name;
-		displayUesrId.text += userId.text;
-		gemText.text += result.gem;
-		goldText.text += result.gold;
+		displayUesrName.text = result.name;
+		displayUesrId.text = userId.text;
+		gemText.text = result.gem.ToString();
+		goldText.text = result.gold.ToString();
 
 		AddUserScreen.SetActive(false);
 	}

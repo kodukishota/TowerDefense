@@ -16,7 +16,7 @@ public class InfantryCharacter : MonoBehaviour
 	private CanAttackEnemy m_canAttackEnemy;
 
 	static int Speed = 4;               //‘«‚Ì‘¬‚³
-	static int AttackDamage = 5;        //UŒ‚—Í
+	//static int AttackDamage = 5;        //UŒ‚—Í
 	[SerializeField] float AttackCooolDown = 3;	//UŒ‚‘¬“x
 
 	bool m_findEnemy;           //“G‚ğŒ©‚Â‚¯‚½‚©

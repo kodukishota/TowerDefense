@@ -7,7 +7,7 @@ public class LoadCardImage : MonoBehaviour
 {
 	public static Sprite Load(int cardId)
 	{
-		var rawData = File.ReadAllBytes("Assets/CharacterIcon/" + cardId.ToString("000") + ".png");
+		var rawData = File.ReadAllBytes("Assets/Character/CharacterIcon/" + cardId.ToString("000") + ".png");
 		Texture2D texture = new Texture2D(0, 0);
 		texture.LoadImage(rawData);
 		return Sprite.Create(
