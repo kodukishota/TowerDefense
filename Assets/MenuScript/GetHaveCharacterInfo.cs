@@ -1,27 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class GetUserInfo : MonoBehaviour
+public class GetHaveCharacterInfo : MonoBehaviour
 {
 	[SerializeField] TMP_InputField userId;
-
-	[SerializeField] TextMeshProUGUI gemText;
-	[SerializeField] TextMeshProUGUI goldText;
-
-	[SerializeField] TextMeshProUGUI displayUesrId;
-	[SerializeField] TextMeshProUGUI displayUesrName;
+	[SerializeField] HaveCardView haveCardView;
 
 	[SerializeField] GameObject addUserScreen;
 
 	[System.Serializable]
 	class Result
-	{
-		public string name;
-		public int gem;
-		public int gold;
+	{ 
+		public List<int> character_ids;
 	}
 
 	public void OnClick()
@@ -32,7 +26,7 @@ public class GetUserInfo : MonoBehaviour
 	IEnumerator Request()
 	{
 		IEnumerator coroutine = HttpRequest.PostRequest(
-			"get_user_info.php",
+			"have_character_info.php",
 			new Dictionary<string, string>()
 			{
 				{"user_id", userId.text }
@@ -40,13 +34,11 @@ public class GetUserInfo : MonoBehaviour
 		yield return StartCoroutine(coroutine);
 		var result = JsonUtility.FromJson<Result>((string)coroutine.Current);
 
-		Debug.Log(result.name);
+		result.character_ids.Sort();
 
-		displayUesrName.text = result.name;
-		displayUesrId.text = userId.text;
-		gemText.text = result.gem.ToString();
-		goldText.text = result.gold.ToString();
+		Debug.Log(result.character_ids);
 
-		addUserScreen.SetActive(false);
+		haveCardView.Reset();
+		haveCardView.Add(result.character_ids);
 	}
 }

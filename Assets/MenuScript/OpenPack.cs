@@ -31,7 +31,6 @@ public class OpenPack : MonoBehaviour
 		public int gem;
 	}
 
-
 	public void OnClick()
 	{
 		StartCoroutine(Request());
