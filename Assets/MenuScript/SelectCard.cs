@@ -11,20 +11,34 @@ public class SelectCard : MonoBehaviour
 	[SerializeField] GameObject pickUpFrame;
 	[SerializeField] GameObject card;
 
+	[SerializeField] private AddDeck addDeck;
+	[SerializeField] private ExclusionDeck exclusionDeck;
+
 	int m_cardId;
 
 	GameObject m_frame;
 
-	public int CharacterId()
+	public void SetAddDeck(AddDeck addDeckArgument)
 	{
-		return m_cardId;
+		addDeck = addDeckArgument;
+	}
+
+	public void SetExclusionDeck(ExclusionDeck exclusionDeckArgument)
+	{
+		exclusionDeck = exclusionDeckArgument;
 	}
 
 	void Update()
 	{
-		if(Input.GetMouseButton(0) && m_frame != null)
+		//string cardIdText = card.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text;
+
+		//m_cardId = int.Parse(cardIdText);
+
+		if (Input.GetMouseButton(0) && m_frame != null)
 		{
 			Destroy(m_frame);
+
+			//addDeck.SetCardId(-1);
 		}
 	}
 
@@ -35,12 +49,20 @@ public class SelectCard : MonoBehaviour
 
 	private void SelectCardView()
 	{
-		string cardId = card.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text;
+		int childId = transform.GetSiblingIndex();
 
-		m_cardId = int.Parse(cardId);
-		
 		m_frame = Instantiate(pickUpFrame, card.transform.position, Quaternion.identity, card.transform);
 		Debug.Log("‚¨‚³‚ê‚½");
+
+		if(tag == "HaveCard")
+		{
+			addDeck.SetCardId(childId);
+		}
+		if (tag == "Deck")
+		{
+			exclusionDeck.SetCardId(childId);
+		}
+
 		/*
 		characterInfo.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = characterData.datas[m_cardId].m_name;
 		characterInfo.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = characterData.datas[m_cardId].m_attackDamage.ToString();

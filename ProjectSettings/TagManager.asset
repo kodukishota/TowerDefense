@@ -8,6 +8,8 @@ TagManager:
   - Carcass
   - Bule
   - Red
+  - Deck
+  - HaveCard
   layers:
   - Default
   - TransparentFX

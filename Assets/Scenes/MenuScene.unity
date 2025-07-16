@@ -133,10 +133,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1288290}
   - component: {fileID: 1288292}
-  - component: {fileID: 1288291}
+  - component: {fileID: 1288293}
   m_Layer: 5
-  m_Name: Content
-  m_TagString: Untagged
+  m_Name: Deck
+  m_TagString: Deck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,34 +159,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.000049591064, y: 0.000039142426}
-  m_SizeDelta: {x: 0, y: 300}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &1288291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1288289}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 3
-  m_Spacing: 15
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 1
 --- !u!114 &1288292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +175,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 0
+--- !u!114 &1288293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 20
+    m_Right: 0
+    m_Top: 20
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 10
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &8459071
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 8459075}
   - component: {fileID: 8459074}
   - component: {fileID: 8459073}
+  - component: {fileID: 8459076}
   m_Layer: 5
   m_Name: ExclusionButton
   m_TagString: Untagged
@@ -284,7 +285,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8459074}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8459076}
+        m_TargetAssemblyTypeName: ExclusionDeck, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8459074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,6 +336,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8459071}
   m_CullTransparentMesh: 1
+--- !u!114 &8459076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8459071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46100942bd8eccd4c83a8db42b721a88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deckCardView: {fileID: 1288289}
+  parentHaveCard: {fileID: 1135536068}
 --- !u!1 &10197805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1918,6 +1945,8 @@ GameObject:
   - component: {fileID: 476166977}
   - component: {fileID: 476166976}
   - component: {fileID: 476166975}
+  - component: {fileID: 476166978}
+  - component: {fileID: 476166979}
   m_Layer: 5
   m_Name: KeepButton
   m_TagString: Untagged
@@ -1989,7 +2018,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 476166976}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 476166978}
+        m_TargetAssemblyTypeName: DeckKeep, Assembly-CSharp
+        m_MethodName: OnColick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 476166979}
+        m_TargetAssemblyTypeName: CloaseScreen, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 0
 --- !u!114 &476166976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2028,6 +2081,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 476166973}
   m_CullTransparentMesh: 1
+--- !u!114 &476166978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476166973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cccaf4d078dc8d4bacb25a212ce02d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deckCard: {fileID: 1288289}
+  userId: {fileID: 1434161870}
+--- !u!114 &476166979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476166973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b533e595b9a0d549a5326e668ebd16a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screen: {fileID: 311755946}
 --- !u!1 &501098647
 GameObject:
   m_ObjectHideFlags: 0
@@ -2974,6 +3054,7 @@ GameObject:
   - component: {fileID: 774242584}
   - component: {fileID: 774242583}
   - component: {fileID: 774242582}
+  - component: {fileID: 774242585}
   m_Layer: 5
   m_Name: AddButton
   m_TagString: Untagged
@@ -3045,7 +3126,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 774242583}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 774242585}
+        m_TargetAssemblyTypeName: AddDeck, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &774242583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3084,6 +3177,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 774242580}
   m_CullTransparentMesh: 1
+--- !u!114 &774242585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774242580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a836541681609ba4db54ad106992c13b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  haveCardView: {fileID: 1135536067}
+  parentDeck: {fileID: 1288290}
 --- !u!1 &778060658
 GameObject:
   m_ObjectHideFlags: 0
@@ -3408,7 +3515,7 @@ GameObject:
   - component: {fileID: 836614156}
   m_Layer: 5
   m_Name: Viewport
-  m_TagString: Untagged
+  m_TagString: Deck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3744,7 +3851,7 @@ GameObject:
   - component: {fileID: 924316577}
   m_Layer: 5
   m_Name: DeckView
-  m_TagString: Untagged
+  m_TagString: Deck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3783,7 +3890,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 1288290}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 0
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -4359,7 +4466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5273faa52f7044ab04e2071cfb2028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 7046113730436837310, guid: feff804bfd3b14d468aca1a798626a36, type: 3}
+  cardPrefab: {fileID: 3649972692536225624, guid: feff804bfd3b14d468aca1a798626a36, type: 3}
   characterDataBase: {fileID: 11400000, guid: 4f412c672f460d04997b4cbd1f7f0363, type: 2}
   parent: {fileID: 85401197}
 --- !u!114 &968969195
@@ -4635,7 +4742,7 @@ GameObject:
   - component: {fileID: 1135536070}
   - component: {fileID: 1135536071}
   m_Layer: 5
-  m_Name: Content
+  m_Name: HaveCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7579,9 +7686,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6441ad703f7664d4498c9178eef3f18a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 7046113730436837310, guid: feff804bfd3b14d468aca1a798626a36, type: 3}
+  cardPrefab: {fileID: 3649972692536225624, guid: feff804bfd3b14d468aca1a798626a36, type: 3}
   characterDataBase: {fileID: 11400000, guid: 4f412c672f460d04997b4cbd1f7f0363, type: 2}
   parent: {fileID: 1135536068}
+  addDeck: {fileID: 774242585}
+  exclusionDeck: {fileID: 8459076}
 --- !u!1 &1818858338
 GameObject:
   m_ObjectHideFlags: 0
