@@ -5,27 +5,28 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[DefaultExecutionOrder(+5)]
-public class GetHaveCharacterInfo : MonoBehaviour
+[DefaultExecutionOrder(-5)]
+public class GetUserDeck : MonoBehaviour
 {
 	[SerializeField] TMP_InputField userId;
-	[SerializeField] CardView haveCardView;
+
+	[SerializeField] UserDeck userDeck;
 
 	[System.Serializable]
 	class Result
-	{ 
-		public List<int> character_ids;
-	}
-
-	public void OnClick()
 	{
-		Invoke("WaitRequest", 0.5f);
+		public List<int> in_deck_cards;
 	}
 
-	IEnumerator Request()
+	void Start()
+	{
+		StartCoroutine(Request());
+	}
+
+	public IEnumerator Request()
 	{
 		IEnumerator coroutine = HttpRequest.PostRequest(
-			"have_character_info.php",
+			"get_user_deck.php",
 			new Dictionary<string, string>()
 			{
 				{"user_id", userId.text }
@@ -33,14 +34,8 @@ public class GetHaveCharacterInfo : MonoBehaviour
 		yield return StartCoroutine(coroutine);
 		var result = JsonUtility.FromJson<Result>((string)coroutine.Current);
 
-		result.character_ids.Sort();
+		result.in_deck_cards.Sort();
 
-		haveCardView.ResetHaveCard();
-		haveCardView.AddHaveCard(result.character_ids);
-	}
-
-	void WaitRequest()
-	{
-		StartCoroutine(Request());
+		userDeck.AddDeckInfo(result.in_deck_cards);
 	}
 }

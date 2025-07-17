@@ -5,35 +5,43 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HaveCardView : MonoBehaviour
+public class CardView : MonoBehaviour
 {
 	[SerializeField] GameObject cardPrefab;
 	[SerializeField] CharacterDataBase characterDataBase;
+	[SerializeField] DeckCardView deckCardView;
 
-	[SerializeField] Transform parent;
+	[SerializeField] Transform haveCardParent;
+
 	[SerializeField] AddDeck addDeck;
 	[SerializeField] ExclusionDeck exclusionDeck;
 
-	Transform cardPrefabChild;
+	List<int> m_useIds; //もうすでにあるカードID保存用
 
-	List<int> m_useIds;	//もうすでにあるカードID保存用
-
-	public void Add(List<int> cards)
+	public void AddHaveCard(List<int> cards)
 	{
-		cardPrefabChild = cardPrefab.transform.GetChild(0);
-
 		if (m_useIds != null)
 		{
 			m_useIds.Clear();
-			m_useIds = new List<int>();
+			m_useIds = new List<int>(); 
+
+			if (deckCardView.GetUseIds() != null)
+			{
+				m_useIds = deckCardView.GetUseIds();
+			}
 		}
 		else
 		{
 			m_useIds = new List<int>();
+
+			if (deckCardView.GetUseIds() != null)
+			{
+				m_useIds = deckCardView.GetUseIds();
+			}
 		}
 
 		foreach (var id in cards)
-		{				
+		{
 			if (!m_useIds.Contains(id))
 			{
 				cardPrefab.transform.GetChild(1).GetComponent<Image>().sprite = LoadCardImage.Load(id);
@@ -45,7 +53,7 @@ public class HaveCardView : MonoBehaviour
 				cardCost.text = characterDataBase.datas[id - 1].m_cost.ToString() + "$";
 				cardId.text = id.ToString();
 
-				GameObject cardImage = Instantiate(cardPrefab, parent);
+				GameObject cardImage = Instantiate(cardPrefab, haveCardParent);
 
 				SelectCard selectCard = cardImage.GetComponent<SelectCard>();
 
@@ -59,9 +67,9 @@ public class HaveCardView : MonoBehaviour
 		}
 	}
 
-	public void Reset()
+	public void ResetHaveCard()
 	{
-		foreach (Transform child in parent)
+		foreach (Transform child in haveCardParent)
 		{
 			Destroy(child.gameObject);
 		}

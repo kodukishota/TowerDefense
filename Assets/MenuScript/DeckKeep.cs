@@ -9,19 +9,15 @@ public class DeckKeep : MonoBehaviour
 
 	[SerializeField] TMP_InputField userId;
 
+	[SerializeField] GameObject compositionScreen;
+	[SerializeField] GetUserDeck getUserDeck;
+
 	public void OnColick()
 	{
-		for (int i = 0; i < deckCard.transform.childCount; i++)
-		{
-			GameObject card = deckCard.transform.GetChild(i).gameObject;
-
-			string cardText = card.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text;
-
-			StartCoroutine(Request(cardText));
-		}
+		Invoke("WaitReset", 0.5f);
 	}
 
-	IEnumerator Request(string characterId)
+	IEnumerator AddDeckRequest(string characterId)
 	{
 		IEnumerator coroutine = HttpRequest.PostRequest(
 			"add_deck.php",
@@ -31,9 +27,20 @@ public class DeckKeep : MonoBehaviour
 				{"character_id",characterId}
 			});
 		yield return StartCoroutine(coroutine);
-		//var result = JsonUtility.FromJson<Result>((string)coroutine.Current);
+	}
+	void WaitReset()
+	{
+		for (int i = 0; i < deckCard.transform.childCount; i++)
+		{
+			GameObject card = deckCard.transform.GetChild(i).gameObject;
 
-		//result.character_ids.Sort();
+			string cardText = card.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text;
 
+			StartCoroutine(AddDeckRequest(cardText));
+		}
+
+		getUserDeck.Request();
+
+		compositionScreen.SetActive(false);
 	}
 }
