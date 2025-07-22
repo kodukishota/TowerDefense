@@ -1,29 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class UserInfo : MonoBehaviour
+[CreateAssetMenu(menuName = "UserInfo")]
+public class UserInfo : ScriptableObject
 {
-	int m_userId;
-	string m_userName;
+	public List<UserData> datas;
 
-	public int GetUserId()
+	[System.Serializable]
+	public class UserData
 	{
-		return m_userId;
-	}
+		public int m_id;
+		public string m_name;
 
-	public void SetUserId(int userId)
-	{
-		m_userId = userId;
-	}
-
-	public string GetUserName()
-	{
-		return m_userName;
-	}
-
-	public void SetUserName(string userName)
-	{
-		m_userName = userName;
+		public void SetStatus(int id,string name)
+		{
+			m_id = id;
+			m_name = name;
+		}
 	}
 }

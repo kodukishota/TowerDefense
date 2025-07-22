@@ -12,7 +12,7 @@ public class LoadStage : MonoBehaviour
 
 	public void OnClick()
 	{
-		SceneManager.LoadScene(SceneName.ToString(), LoadSceneMode.Additive);
+		SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
 
 		SceneManager.UnloadSceneAsync(DeleteSceneName);
 	}

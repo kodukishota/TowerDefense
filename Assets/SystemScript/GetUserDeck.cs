@@ -5,12 +5,13 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[DefaultExecutionOrder(-5)]
 public class GetUserDeck : MonoBehaviour
 {
 	[SerializeField] TMP_InputField userId;
 
-	[SerializeField] UserDeck userDeck;
+	[SerializeField] DeckCardView deckCardView;
+
+	[SerializeField] private bool m_inGame;
 
 	[System.Serializable]
 	class Result
@@ -19,6 +20,11 @@ public class GetUserDeck : MonoBehaviour
 	}
 
 	void Start()
+	{
+		
+	}
+
+	public void OnClick()
 	{
 		StartCoroutine(Request());
 	}
@@ -36,6 +42,11 @@ public class GetUserDeck : MonoBehaviour
 
 		result.in_deck_cards.Sort();
 
-		userDeck.AddDeckInfo(result.in_deck_cards);
+
+		if(!m_inGame)
+		{
+			deckCardView.ResetDeck();
+			deckCardView.AddDeck(result.in_deck_cards);
+		}
 	}
 }

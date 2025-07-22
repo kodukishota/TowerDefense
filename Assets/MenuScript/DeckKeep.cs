@@ -10,7 +10,6 @@ public class DeckKeep : MonoBehaviour
 	[SerializeField] TMP_InputField userId;
 
 	[SerializeField] GameObject compositionScreen;
-	[SerializeField] GetUserDeck getUserDeck;
 
 	public void OnColick()
 	{
@@ -28,18 +27,17 @@ public class DeckKeep : MonoBehaviour
 			});
 		yield return StartCoroutine(coroutine);
 	}
+
 	void WaitReset()
 	{
 		for (int i = 0; i < deckCard.transform.childCount; i++)
 		{
 			GameObject card = deckCard.transform.GetChild(i).gameObject;
 
-			string cardText = card.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text;
+			string cardIdText = card.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text;
 
-			StartCoroutine(AddDeckRequest(cardText));
+			StartCoroutine(AddDeckRequest(cardIdText));
 		}
-
-		getUserDeck.Request();
 
 		compositionScreen.SetActive(false);
 	}

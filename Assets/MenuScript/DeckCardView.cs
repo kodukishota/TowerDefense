@@ -14,8 +14,6 @@ public class DeckCardView : MonoBehaviour
 	[SerializeField] AddDeck addDeck;
 	[SerializeField] ExclusionDeck exclusionDeck;
 
-	[SerializeField] UserDeck userDeck;
-
 	List<int> m_useIds; //もうすでにあるカードID保存用
 
 	public List<int> GetUseIds()
@@ -23,10 +21,6 @@ public class DeckCardView : MonoBehaviour
 		return m_useIds;
 	}
 
-	public void OnClick()
-	{
-		AddDeck(userDeck.GetInDeckCards());
-	}
 
 	public void AddDeck(List<int> cards)
 	{
