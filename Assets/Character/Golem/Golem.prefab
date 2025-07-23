@@ -44,8 +44,8 @@ GameObject:
   - component: {fileID: 3937888886264926411}
   - component: {fileID: 3937888886426896630}
   - component: {fileID: 3937888886426896625}
-  - component: {fileID: 3937888886426896629}
   - component: {fileID: 3937888886426896624}
+  - component: {fileID: 3937888886426896629}
   m_Layer: 0
   m_Name: Golem
   m_TagString: Enemy
@@ -122,6 +122,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.98, y: 4.23, z: 2.18}
   m_Center: {x: 0, y: 2, z: 0.05}
+--- !u!114 &3937888886426896624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3937888886264926410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c9f8e5803821d84d99752bdd3fb0c71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterData: {fileID: 11400000, guid: 4f412c672f460d04997b4cbd1f7f0363, type: 2}
+  anim: {fileID: 3937888886264926411}
+  m_hp: 50
 --- !u!114 &3937888886426896629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,22 +150,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 3937888886264926411}
-  m_characterScript: {fileID: 3937888886426896624}
+  characterScript: {fileID: 3937888886426896624}
+  characterDataBase: {fileID: 11400000, guid: 4f412c672f460d04997b4cbd1f7f0363, type: 2}
   AttackCooolDown: 6
---- !u!114 &3937888886426896624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3937888886264926410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c9f8e5803821d84d99752bdd3fb0c71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 3937888886264926411}
-  m_hp: 50
 --- !u!1 &3937888886276039523
 GameObject:
   m_ObjectHideFlags: 0

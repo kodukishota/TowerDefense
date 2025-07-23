@@ -1,18 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class GetUserDeck : MonoBehaviour
+public class InGameLoadDeck : MonoBehaviour
 {
 	[SerializeField] UserInfo userInfo;
-
-	[SerializeField] DeckCardView deckCardView;
+	
 	[SerializeField] InGameCardView inGameCardView;
-
-	[SerializeField] private bool m_inGame;
 
 	[System.Serializable]
 	class Result
@@ -21,14 +15,6 @@ public class GetUserDeck : MonoBehaviour
 	}
 
 	void Start()
-	{
-		if(m_inGame)
-		{
-			StartCoroutine(Request());
-		}
-	}
-
-	public void OnClick()
 	{
 		StartCoroutine(Request());
 	}
@@ -45,16 +31,9 @@ public class GetUserDeck : MonoBehaviour
 		var result = JsonUtility.FromJson<Result>((string)coroutine.Current);
 
 		result.in_deck_cards.Sort();
-
-		if(!m_inGame)
-		{
-			deckCardView.ResetDeck();
-			deckCardView.AddDeck(result.in_deck_cards);
-		}
-		if(m_inGame)
-		{
-			inGameCardView.ResetDeck();
-			inGameCardView.AddDeck(result.in_deck_cards);
-		}
+		
+		inGameCardView.ResetDeck();
+		inGameCardView.AddDeck(result.in_deck_cards);
+		
 	}
 }

@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 441858884341772626}
   - component: {fileID: -8656857713706294194}
   m_Layer: 0
-  m_Name: Sword And Shield Walk
+  m_Name: Skeleton
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -310,6 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9f8e5803821d84d99752bdd3fb0c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterData: {fileID: 11400000, guid: 4f412c672f460d04997b4cbd1f7f0363, type: 2}
   anim: {fileID: 441858884341772620}
   m_hp: 10
 --- !u!114 &-8656857713706294194
@@ -325,8 +326,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 441858884341772620}
-  m_characterScript: {fileID: 441858884341772626}
+  characterScript: {fileID: 441858884341772626}
   navMeshAgent: {fileID: 441858884341772622}
+  characterDataBase: {fileID: 11400000, guid: 4f412c672f460d04997b4cbd1f7f0363, type: 2}
   AttackCooolDown: 3
 --- !u!1 &1804223321273702248
 GameObject:

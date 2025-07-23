@@ -16,6 +16,8 @@ public class GetUserInfo : MonoBehaviour
 
 	[SerializeField] GameObject addUserScreen;
 
+	[SerializeField] UserInfo userInfo;
+
 
 	[System.Serializable]
 	class Result
@@ -49,5 +51,7 @@ public class GetUserInfo : MonoBehaviour
 		goldText.text = result.gold.ToString();
 
 		addUserScreen.SetActive(false);
+
+		userInfo.data.SetStatus(int.Parse(userId.text), result.name);
 	}
 }

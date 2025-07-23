@@ -6,11 +6,15 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-	[SerializeField] InstantiateCharacter[] instantiateCharacters;
-
 	[SerializeField] Camera mainCamera;
 
+	[SerializeField]  List<InstantiateCharacter> instantiateCharacters;
 	Vector3 m_currentPosition = Vector3.zero;
+
+	public void SetInstantiateCharacters(InstantiateCharacter instantiateCharacter)
+	{
+		instantiateCharacters.Add(instantiateCharacter);
+	}
 
 	void Update()
 	{
@@ -20,31 +24,34 @@ public class PlayerScript : MonoBehaviour
 	//キャラクタを生成する
 	void CreateCharacter()
 	{
-		for (int i = 0; i < instantiateCharacters.Length; i++)
+		if (instantiateCharacters != null)
 		{
-			//バーをクリックすることによって出したいキャラを選ぶ
-			if (instantiateCharacters[i].GetOnClick())
+			for (int i = 0; i < instantiateCharacters.Count; i++)
 			{
-				Vector2 touchScreenPosition = Input.mousePosition;
-
-				touchScreenPosition.x = Mathf.Clamp(touchScreenPosition.x, 0.0f, Screen.width);
-				touchScreenPosition.y = Mathf.Clamp(touchScreenPosition.y, 0.0f, Screen.height);
-
-				Ray touchPointToRay = mainCamera.ScreenPointToRay(touchScreenPosition);
-
-				RaycastHit hitInfo = new RaycastHit();
-
-				if (Physics.Raycast(touchPointToRay, out hitInfo))
+				//バーをクリックすることによって出したいキャラを選ぶ
+				if (instantiateCharacters[i].GetOnClick())
 				{
-					m_currentPosition = hitInfo.point;
+					Vector2 touchScreenPosition = Input.mousePosition;
 
-					//好きな位置でマウスをクリックするとキャラを出せる
-					if (Input.GetMouseButtonDown(0))
+					touchScreenPosition.x = Mathf.Clamp(touchScreenPosition.x, 0.0f, Screen.width);
+					touchScreenPosition.y = Mathf.Clamp(touchScreenPosition.y, 0.0f, Screen.height);
+
+					Ray touchPointToRay = mainCamera.ScreenPointToRay(touchScreenPosition);
+
+					RaycastHit hitInfo = new RaycastHit();
+
+					if (Physics.Raycast(touchPointToRay, out hitInfo))
 					{
-						instantiateCharacters[i].Instantiate(m_currentPosition);
+						m_currentPosition = hitInfo.point;
+
+						//好きな位置でマウスをクリックするとキャラを出せる
+						if (Input.GetMouseButtonDown(0))
+						{
+							instantiateCharacters[i].Instantiate(m_currentPosition);
+						}
 					}
 				}
 			}
-		}
+		}		
 	}
 }

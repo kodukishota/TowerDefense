@@ -1936,7 +1936,7 @@ GameObject:
   - component: {fileID: 3562873490494969544}
   - component: {fileID: 3562873490494969543}
   m_Layer: 0
-  m_Name: PolyArtWizardMaskTintMat
+  m_Name: Wizard
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2023,6 +2023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9f8e5803821d84d99752bdd3fb0c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterData: {fileID: 11400000, guid: 4f412c672f460d04997b4cbd1f7f0363, type: 2}
   anim: {fileID: 3469319999307251578}
   m_hp: 15
 --- !u!195 &3562873490494969544
@@ -2060,7 +2061,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 3469319999307251578}
-  m_characterScript: {fileID: 3562873490494969547}
+  characterScript: {fileID: 3562873490494969547}
+  characterDataBase: {fileID: 11400000, guid: 4f412c672f460d04997b4cbd1f7f0363, type: 2}
   navMeshAgent: {fileID: 3562873490494969544}
   projectilePrefab: {fileID: 2711506230371857160, guid: 5a580147b0039d04a96a15c1a0e38d60, type: 3}
   AttackCooolDown: 5

@@ -9,14 +9,14 @@ public class RangedInfantry : MonoBehaviour
 {
 	
 	[SerializeField] private Animator anim;
-	[SerializeField] private CharacterScript m_characterScript;
+	[SerializeField] private CharacterScript characterScript;
+
+	[SerializeField] CharacterDataBase characterDataBase;
 
 	[SerializeField] private NavMeshAgent navMeshAgent;
 
 	[SerializeField] private GameObject projectilePrefab;		//矢だったり魔法などのオブジェクト
 
-	static int Speed = 4;               //足の速さ
-	static int AttackDamage = 5;        //攻撃力
 	[SerializeField] float AttackCooolDown = 5; //攻撃速度
 
 	private GameObject m_enemyCastle;
@@ -35,6 +35,8 @@ public class RangedInfantry : MonoBehaviour
 
 	bool m_isIdle;
 
+	int m_id;
+
 	GameObject m_enemy;
 	GameObject m_projectile;
 
@@ -45,18 +47,20 @@ public class RangedInfantry : MonoBehaviour
 
 	void Start()
 	{
-		navMeshAgent.speed = Speed;
+		m_id = characterScript.GetId();
 
-		m_attackDamage = AttackDamage;
+		navMeshAgent.speed = characterDataBase.datas[m_id].m_speed;
+
+		m_attackDamage = characterDataBase.datas[m_id].m_attackDamage;
 		m_canAttack = false;
 
-		m_enemyCastle = m_characterScript.GetenemyCastle();
+		m_enemyCastle = characterScript.GetenemyCastle();
 	}
 
 	void Update()
 	{
-		m_searchEnemy = m_characterScript.GetSearchEnemy();
-		m_canAttackEnemy = m_characterScript.GetCanAttackEnemy();
+		m_searchEnemy = characterScript.GetSearchEnemy();
+		m_canAttackEnemy = characterScript.GetCanAttackEnemy();
 
 		m_findEnemy = m_searchEnemy.GetFindEnemy();
 		m_canAttack = m_canAttackEnemy.GetCanAttack();
@@ -68,7 +72,7 @@ public class RangedInfantry : MonoBehaviour
 
 			anim.SetTrigger("Walk");
 
-			navMeshAgent.speed = Speed;
+			navMeshAgent.speed = characterDataBase.datas[m_id].m_speed;
 
 			m_isIdle = false;
 		}

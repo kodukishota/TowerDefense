@@ -6,35 +6,26 @@ using UnityEngine.AI;
 
 public class CharacterScript : MonoBehaviour
 {
+	[SerializeField] CharacterDataBase characterData;
+
 	[SerializeField] private Animator anim;
-	//static int MaxHp = 10;				//Å‘å‘Ì—Í
 
 	[SerializeField] int m_hp;              //‘Ì—Í
-
-	int m_atk;
-	int m_cost;
 
 	GameObject m_enemyCastle;
 	private SearchEnemy m_searchEnemy;
 	private CanAttackEnemy m_canAttackEnemy;
-	
-	bool m_isDeth;
 
-	public void SetStatus(int hp,int atk,int cost)
+	int m_id;
+
+	public void SetId(int id)
 	{
-		m_hp = hp;
-		m_atk = atk;
-		m_cost = cost;
+		m_id = id;
 	}
 
-	public int GetAtk()
+	public int GetId()
 	{
-		return m_atk;
-	}
-
-	public int GetCost()
-	{
-		return m_cost;
+		return m_id;
 	}
 
 	public void SetSearchEnemy(SearchEnemy searchEnemy)
@@ -69,7 +60,7 @@ public class CharacterScript : MonoBehaviour
 
 	void Start()
 	{
-		m_isDeth = false;
+		m_hp = characterData.datas[m_id].m_hp;
 	}
 
 	void Update()
@@ -79,12 +70,8 @@ public class CharacterScript : MonoBehaviour
 		{
 			gameObject.tag = "Carcass";
 
-			if (!m_isDeth)
-			{
-				anim.SetTrigger("Deth");
+			anim.SetTrigger("Deth");
 
-				m_isDeth = true;
-			}
 			Invoke("Deth", 2.0f);
 		}
 	}

@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "UserInfo")]
 public class UserInfo : ScriptableObject
 {
-	public List<UserData> datas;
+	public UserData data;
 
 	[System.Serializable]
 	public class UserData

@@ -7,16 +7,15 @@ using UnityEngine.AI;
 public class InfantryCharacter : MonoBehaviour
 {
 	[SerializeField] private Animator anim;
-	[SerializeField] private CharacterScript m_characterScript;
+	[SerializeField] private CharacterScript characterScript;
 
 	[SerializeField] private NavMeshAgent navMeshAgent;
+	[SerializeField] CharacterDataBase characterDataBase;
 
 	private GameObject m_enemyCastle;
 	private SearchEnemy m_searchEnemy;
-	private CanAttackEnemy m_canAttackEnemy;
+	private CanAttackEnemy m_canAttackEnemy;	
 
-	static int Speed = 4;               //‘«‚Ì‘¬‚³
-	//static int AttackDamage = 5;        //UŒ‚—Í
 	[SerializeField] float AttackCooolDown = 3;	//UŒ‚‘¬“x
 
 	bool m_findEnemy;           //“G‚ğŒ©‚Â‚¯‚½‚©
@@ -26,23 +25,28 @@ public class InfantryCharacter : MonoBehaviour
 	bool m_canAttack;           //“G‚ğUŒ‚‚·‚é‚±‚Æ‚ª‚Å‚«‚é‚©
 	float m_attackCooolDown;    //UŒ‚‘¬“x
 
+	int m_id;
+
 	GameObject m_enemy;
 
 	void Start()
 	{
-		navMeshAgent.speed = Speed;
+		m_id = characterScript.GetId();
 
-		m_attackDamage = m_characterScript.GetAtk();
+		navMeshAgent.speed = characterDataBase.datas[m_id].m_speed;
+
+		m_attackDamage = characterDataBase.datas[m_id].m_attackDamage;
+
 		m_findEnemy = false;
 		m_canAttack = false;
 
-		m_enemyCastle = m_characterScript.GetenemyCastle();
+		m_enemyCastle = characterScript.GetenemyCastle();
 	}
 
 	void Update()
 	{
-		m_searchEnemy = m_characterScript.GetSearchEnemy();
-		m_canAttackEnemy = m_characterScript.GetCanAttackEnemy();
+		m_searchEnemy = characterScript.GetSearchEnemy();
+		m_canAttackEnemy = characterScript.GetCanAttackEnemy();
 
 		m_findEnemy = m_searchEnemy.GetFindEnemy();
 		m_canAttack = m_canAttackEnemy.GetCanAttack();
@@ -54,7 +58,8 @@ public class InfantryCharacter : MonoBehaviour
 
 			anim.SetTrigger("Walk");
 
-			navMeshAgent.speed = Speed;
+			//‘«‚Ì‘¬‚³‚ğ‚à‚Æ‚É–ß‚·
+			navMeshAgent.speed = characterDataBase.datas[m_id].m_speed;
 		}
 		else
 		{
