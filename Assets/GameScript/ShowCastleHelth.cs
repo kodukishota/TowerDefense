@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class ShowCastleHelth : MonoBehaviour
 {
-    [SerializeField] Slider HelthGage;
+    Slider HelthGage;
+	[SerializeField] CharacterScript CharacterScript;
 
-    void Update()
+	void Start()
+	{
+		HelthGage = GetComponent<Slider>();
+	}
+
+	void Update()
     {
-          
-    }
+		HelthGage.value = CharacterScript.GetHelth();
+	}
 }

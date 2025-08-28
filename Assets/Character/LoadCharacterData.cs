@@ -6,7 +6,7 @@ public class LoadCharacterData : MonoBehaviour
 {
 	[SerializeField] CharacterDataBase characterDataBase;
 
-	[SerializeField] int characterIndex;
+	//[SerializeField] int characterIndex;
 
 	class Result
 	{
@@ -19,7 +19,7 @@ public class LoadCharacterData : MonoBehaviour
 
 	private void Start()
 	{
-		for (int i = 1; i <= characterIndex; i++)
+		for (int i = 1; i <= characterDataBase.datas.Count; i++)
 		{
 			StartCoroutine(Request(i));
 		}
@@ -34,13 +34,15 @@ public class LoadCharacterData : MonoBehaviour
 				{"character_id", characterId.ToString() }
 			});
 		yield return StartCoroutine(coroutine);
-		var result = JsonUtility.FromJson<Result>((string)coroutine.Current);
+		var result = JsonUtility.FromJson<Result>((string)coroutine.Current
+			);
 
 		characterDataBase.datas[characterId - 1].SetStatus(
 			result.name,
 			result.hp,
 			result.atk,
 			result.speed,
-			result.cost);
+			result.cost
+			);
 	}
 }

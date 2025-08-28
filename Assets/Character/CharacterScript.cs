@@ -16,7 +16,7 @@ public class CharacterScript : MonoBehaviour
 	private SearchEnemy m_searchEnemy;
 	private CanAttackEnemy m_canAttackEnemy;
 
-	int m_id;
+	[SerializeField] int m_id;
 
 	public void SetId(int id)
 	{
@@ -56,6 +56,11 @@ public class CharacterScript : MonoBehaviour
 	public GameObject GetenemyCastle()
 	{
 		return m_enemyCastle;
+	}
+
+	public int GetHelth()
+	{
+		return m_hp;
 	}
 
 	void Start()

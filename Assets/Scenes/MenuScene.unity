@@ -727,7 +727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterDataBase: {fileID: 11400000, guid: 4f412c672f460d04997b4cbd1f7f0363, type: 2}
-  characterIndex: 3
+  characterIndex: 4
 --- !u!4 &109300572
 Transform:
   m_ObjectHideFlags: 0
@@ -8270,7 +8270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 380e06efea5809840ab4f2f8aab7e9cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screen: {fileID: 0}
+  screen: {fileID: 1503649721}
 --- !u!114 &1824070783
 MonoBehaviour:
   m_ObjectHideFlags: 0

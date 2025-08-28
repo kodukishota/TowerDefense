@@ -66,7 +66,7 @@ public class InstantiateCharacter : MonoBehaviour
 	public void Instantiate(Vector3 position)
 	{
 		//‚¨‹à‚ª‚ ‚Á‚½‚ço‚¹‚é
-		if(walletScript.GetHaveMoney() >= characterDataBase.datas[m_characterId].m_cost)
+		if(walletScript.GetHaveMoney() >= characterDataBase.datas[m_characterId - 1].m_cost)
 		{
 			GameObject character = Instantiate(m_character, position, Quaternion.Euler(0,-90,0));
 
@@ -77,7 +77,7 @@ public class InstantiateCharacter : MonoBehaviour
 
 			character.tag = "Bule";
 
-			walletScript.UseMoney(characterDataBase.datas[m_characterId].m_cost);
+			walletScript.UseMoney(characterDataBase.datas[m_characterId - 1].m_cost);
 
 			m_onClick = false;
 		}

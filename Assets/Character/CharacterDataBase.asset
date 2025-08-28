@@ -28,3 +28,8 @@ MonoBehaviour:
     m_attackDamage: 10
     m_speed: 0
     m_cost: 50
+  - m_name: "\u30AD\u30E3\u30C3\u30B9\u30EB"
+    m_hp: 100
+    m_attackDamage: 0
+    m_speed: 0
+    m_cost: 0
