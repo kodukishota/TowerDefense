@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class CharacterScript : MonoBehaviour
 {
 	[SerializeField] CharacterDataBase characterData;
+	//[SerializeField] GameObject Character;
 
 	[SerializeField] private Animator anim;
 
@@ -61,6 +62,11 @@ public class CharacterScript : MonoBehaviour
 	public int GetHelth()
 	{
 		return m_hp;
+	}
+
+	public GameObject GetCharacter()
+	{
+		return this.gameObject;
 	}
 
 	void Start()

@@ -20,17 +20,38 @@ public class CanAttackEnemy : MonoBehaviour
 
 	private void OnTriggerStay(Collider other)
 	{
-		if (other.CompareTag("Enemy"))
+		if (m_characterScript.GetCharacter().tag == "Red")
 		{
-			m_canAttack = true;
+			if (other.CompareTag("Blue"))
+			{
+				m_canAttack = true;
+			}
+		}
+		else if(m_characterScript.GetCharacter().tag == "Blue")
+		{
+			if (other.CompareTag("Red"))
+			{
+				m_canAttack = true;
+			}
 		}
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
-		if (other.CompareTag("Enemy"))
+		if(m_characterScript.GetCharacter().tag == "Red")
 		{
-			m_canAttack = false;
+			if (other.CompareTag("Blue"))
+			{
+				m_canAttack = false;
+			}
 		}
+		else if(m_characterScript.GetCharacter().tag == "Blue")
+		{
+			if (other.CompareTag("Red"))
+			{
+				m_canAttack = false;
+			}
+		}
+			
 	}
 }

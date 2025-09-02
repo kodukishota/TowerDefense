@@ -73,15 +73,15 @@ public class InstantiateCharacter : MonoBehaviour
 			CharacterScript characterScript = character.GetComponent<CharacterScript>();
 
 			characterScript.SetEnemyCastle(m_enemyCastle);
-			characterScript.SetId(m_characterId);
+			characterScript.SetId(m_characterId - 1);
 
-			character.tag = "Bule";
+			character.tag = "Blue";
 
 			walletScript.UseMoney(characterDataBase.datas[m_characterId - 1].m_cost);
 
 			m_onClick = false;
 		}
-		//なかったら
+		//なかったらメッセージを表示する
 		else
 		{
 

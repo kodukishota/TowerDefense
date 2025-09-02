@@ -6,10 +6,12 @@ TagManager:
   tags:
   - Enemy
   - Carcass
-  - Bule
   - Red
   - Deck
   - HaveCard
+  - Blue
+  - RedRanged
+  - BlueRanged
   layers:
   - Default
   - TransparentFX

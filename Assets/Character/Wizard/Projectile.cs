@@ -7,6 +7,8 @@ public class Projectile : MonoBehaviour
 	[SerializeField] private RangedInfantry m_rangedInfantry;
 	[SerializeField] private SearchEnemy m_searchEnemy;
 
+	Collider m_collider;
+
 	GameObject m_enemy;
 
 	public void SetRangedInfantry(RangedInfantry rangedInfantry)
@@ -17,6 +19,11 @@ public class Projectile : MonoBehaviour
 	public void SetSearchEnemy(SearchEnemy searchEnemy)
 	{
 		m_searchEnemy = searchEnemy;
+	}
+
+	void Start()
+	{
+		m_collider = GetComponent<Collider>();
 	}
 
 	void Update()
@@ -31,17 +38,40 @@ public class Projectile : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		//“G‚É“–‚½‚Á‚½‚ç“–‚½‚Á‚½‚Æ•Ô‚·
-		if(other.gameObject.CompareTag("Enemy"))
+		if(this.gameObject.tag == "RedRanged")
 		{
-			m_rangedInfantry.SetHitEnemy();
+			//“G‚É“–‚½‚Á‚½‚ç“–‚½‚Á‚½‚Æ•Ô‚·
+			if (other.gameObject.CompareTag("Blue"))
+			{
+				m_rangedInfantry.SetHitEnemy();
 
-			Invoke("OnDestroy", 1f);
+				OffCollider();
+
+				Invoke("OnDestroy", 0.5f);
+			}
 		}
+		else
+		{
+			//“G‚É“–‚½‚Á‚½‚ç“–‚½‚Á‚½‚Æ•Ô‚·
+			if (other.gameObject.CompareTag("Red"))
+			{
+				m_rangedInfantry.SetHitEnemy();
+
+				OffCollider();
+
+				Invoke("OnDestroy", 0.5f);
+			}
+		}
+		
 	}
 
 	private void OnDestroy()
 	{
 		Destroy(gameObject);
+	}
+
+	private void OffCollider()
+	{
+		m_collider.gameObject.SetActive(false);
 	}
 }

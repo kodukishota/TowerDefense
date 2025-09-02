@@ -31,7 +31,8 @@ public class InfantryCharacter : MonoBehaviour
 
 	void Start()
 	{
-		m_id = characterScript.GetId();
+		m_id = characterScript.GetId()
+			;
 
 		navMeshAgent.speed = characterDataBase.datas[m_id].m_speed;
 

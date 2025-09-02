@@ -1937,7 +1937,7 @@ GameObject:
   - component: {fileID: 3562873490494969543}
   m_Layer: 0
   m_Name: Wizard
-  m_TagString: Enemy
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2026,6 +2026,7 @@ MonoBehaviour:
   characterData: {fileID: 11400000, guid: 4f412c672f460d04997b4cbd1f7f0363, type: 2}
   anim: {fileID: 3469319999307251578}
   m_hp: 15
+  m_id: 0
 --- !u!195 &3562873490494969544
 NavMeshAgent:
   m_ObjectHideFlags: 0

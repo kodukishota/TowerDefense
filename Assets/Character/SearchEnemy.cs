@@ -26,16 +26,34 @@ public class SearchEnemy : MonoBehaviour
 
 	private void OnTriggerStay(Collider other)
 	{
-		if (other.CompareTag("Enemy"))
+		if(m_characterScript.GetCharacter().tag == "Red")
 		{
-			m_enemy = other.gameObject;
-			m_findEnemy = true;
-		}
-		if (other.CompareTag("Carcass"))
-		{
-			m_findEnemy = false;
+			if (other.CompareTag("Blue"))
+			{
+				m_enemy = other.gameObject;
+				m_findEnemy = true;
+			}
+			if (other.CompareTag("Carcass"))
+			{
+				m_findEnemy = false;
 
-			m_enemy = null;
+				m_enemy = null;
+			}
 		}
+		else if(m_characterScript.GetCharacter().tag == "Blue")
+		{
+			if (other.CompareTag("Red"))
+			{
+				m_enemy = other.gameObject;
+				m_findEnemy = true;
+			}
+			if (other.CompareTag("Carcass"))
+			{
+				m_findEnemy = false;
+
+				m_enemy = null;
+			}
+		}
+
 	}
 }

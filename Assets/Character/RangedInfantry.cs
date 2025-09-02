@@ -55,6 +55,8 @@ public class RangedInfantry : MonoBehaviour
 		m_canAttack = false;
 
 		m_enemyCastle = characterScript.GetenemyCastle();
+
+		m_attackCooolDown = AttackCooolDown;
 	}
 
 	void Update()
@@ -89,11 +91,7 @@ public class RangedInfantry : MonoBehaviour
 			{
 				AttackEnemy(m_enemy);
 
-				if (!m_isIdle)
-				{
-					anim.SetTrigger("AttackStandby");
-					m_isIdle = true;
-				}
+				
 			}
 		}
 	}
@@ -115,7 +113,7 @@ public class RangedInfantry : MonoBehaviour
 			anim.SetTrigger("Attack");
 
 			//UŒ‚‚Ì”ò‚ÑƒAƒCƒeƒ€¶¬
-			if(!m_isCreated)
+			if (!m_isCreated)
 			{
 				m_projectile = Instantiate(
 					projectilePrefab,
@@ -127,17 +125,26 @@ public class RangedInfantry : MonoBehaviour
 				projectile.SetRangedInfantry(this);
 				projectile.SetSearchEnemy(m_searchEnemy);
 
+				if (this.gameObject.tag == "Red")
+				{
+					m_projectile.tag = "RedRanged";
+				}
+				else
+				{
+					m_projectile.tag = "BlueRanged";
+				}
+
 				m_isCreated = true;
 			}
 
 			if(m_isHit)
 			{
+				m_isCreated = false;
+
 				//‘Ì—Í‚ğŒ¸‚ç‚·
 				characterScript.HitDamege(m_attackDamage);
 
-				m_attackCooolDown = AttackCooolDown;
-
-				m_isCreated = false;
+				m_attackCooolDown = AttackCooolDown;				
 			}	
 		}
 		else
