@@ -22,6 +22,8 @@ public class GuardCharacter : MonoBehaviour
 
 	int m_id;
 
+	bool m_endAnim;
+
 	GameObject m_enemy;
 
 	void Start()
@@ -30,6 +32,8 @@ public class GuardCharacter : MonoBehaviour
 
 		m_attackDamage = characterDataBase.datas[m_id].m_attackDamage;
 		m_attackCooolDown = AttackCooolDown;
+
+		m_endAnim = false;
 	}
 
 	void Update()
@@ -68,8 +72,14 @@ public class GuardCharacter : MonoBehaviour
 
 		if (m_attackCooolDown <= 0)
 		{
-			//攻撃アニメーションを再生
-			anim.SetTrigger("Attack");
+
+			if(!m_endAnim)
+			{
+				//攻撃アニメーションを再生
+				anim.SetTrigger("Attack");
+
+				m_endAnim = true;
+			}
 
 			if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0)
 			{
@@ -81,6 +91,8 @@ public class GuardCharacter : MonoBehaviour
 		else
 		{
 			anim.SetTrigger("Idle");
+
+			m_endAnim = false;
 		}
 	}
 }

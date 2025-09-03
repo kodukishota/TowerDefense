@@ -11,13 +11,13 @@ public class Stage1Enemy : MonoBehaviour
 	[SerializeField] private GameObject[] Character;
 
 	[SerializeField] private GameObject EnemyCastle;
-	[SerializeField] private Transform[] SpownPosition;
+	[SerializeField] private Transform[] SpownPositionX;
+	[SerializeField] private Transform[] SpownPositionZ;
 
-	static float SpownCoolDown = 5.0f;
+	static float SpownCoolDown = 10.0f;
 
 	int m_characterId;
 	float m_spownCoolDown;
-
 
 	private void Update()
 	{
@@ -25,21 +25,23 @@ public class Stage1Enemy : MonoBehaviour
 
 		if (m_spownCoolDown >= SpownCoolDown)
 		{
-			int positionIndex = 0;
-
-			positionIndex = Random.Range(1, 3);
 			m_characterId = Random.Range(0, Character.Length);
 
-			Instantiate(SpownPosition[positionIndex].position, m_characterId);
+			CharacterInstantiate( m_characterId);
 
 			m_spownCoolDown = 0;
 		}
 	}
 
 	//ÉLÉÉÉâÉNÉ^ÇÃê∂ê¨
-	public void Instantiate(Vector3 position, int characterId)
+	public void CharacterInstantiate(int characterId)
 	{
-		GameObject character = Instantiate(Character[characterId], position, Quaternion.Euler(0, 0, 0));
+		float spownPosX = Random.Range(SpownPositionX[0].position.x, SpownPositionX[1].position.x);
+		float spownPosZ = Random.Range(SpownPositionZ[0].position.z, SpownPositionZ[1].position.z);
+
+		GameObject character = Instantiate(Character[characterId],
+			new Vector3(spownPosX, 0, spownPosZ),
+			Quaternion.Euler(0, 0, 0));
 
 		CharacterScript characterScript = character.GetComponent<CharacterScript>();
 

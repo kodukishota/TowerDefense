@@ -61,13 +61,12 @@ public class Projectile : MonoBehaviour
 
 				Invoke("OnDestroy", 0.5f);
 			}
-		}
-		
+		}		
 	}
 
 	private void OnDestroy()
 	{
-		Destroy(gameObject);
+		Destroy(this.gameObject);
 	}
 
 	private void OffCollider()

@@ -4,7 +4,7 @@ using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadStage : MonoBehaviour
+public class LoadScene: MonoBehaviour
 {
 	[SerializeField] string SceneName;
 
@@ -12,8 +12,8 @@ public class LoadStage : MonoBehaviour
 
 	public void OnClick()
 	{
-		SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
+		//SceneManager.UnloadSceneAsync(DeleteSceneName);
 
-		SceneManager.UnloadSceneAsync(DeleteSceneName);
+		SceneManager.LoadScene(SceneName);
 	}
 }

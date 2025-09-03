@@ -21,14 +21,14 @@ public class InGameCardView : MonoBehaviour
 	{
 		foreach (var id in cards)
 		{
-			cardPrefab.transform.GetChild(0).GetComponent<Image>().sprite = LoadCardImage.Load(id);
+			cardPrefab.transform.GetChild(0).GetComponent<Image>().sprite = LoadCardImage.Load(id - 1);
 
 			GameObject card = Instantiate(cardPrefab, deckParent);
 
 			InstantiateCharacter instantiateCharacter = card.GetComponent<InstantiateCharacter>();
 
-			instantiateCharacter.SetCharacterId(id);
-			instantiateCharacter.SetGameObject(character[id - 1], enemyCastle);
+			instantiateCharacter.SetCharacterId(id - 1);
+			instantiateCharacter.SetGameObject(character[id - 2], enemyCastle);
 			instantiateCharacter.SetWallet(walletScript);
 			playerScript.SetInstantiateCharacters(instantiateCharacter);
 		}

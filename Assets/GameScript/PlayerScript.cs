@@ -45,9 +45,9 @@ public class PlayerScript : MonoBehaviour
 						m_currentPosition = hitInfo.point;
 
 						//好きな位置でマウスをクリックするとキャラを出せる
-						if (Input.GetMouseButtonDown(0))
+						if (Input.GetMouseButtonDown(0) && hitInfo.collider.tag == "PlayerTerritory")
 						{
-							instantiateCharacters[i].Instantiate(m_currentPosition);
+							instantiateCharacters[i].CharacterInstantiate(m_currentPosition);
 						}
 					}
 				}

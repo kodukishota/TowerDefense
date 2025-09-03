@@ -7,25 +7,13 @@ public class DeckKeep : MonoBehaviour
 {
 	[SerializeField] GameObject deckCard;
 
-	[SerializeField] TMP_InputField userId;
+	[SerializeField] UserInfo userInfo;
 
 	[SerializeField] GameObject compositionScreen;
 
 	public void OnColick()
 	{
 		Invoke("WaitReset", 0.5f);
-	}
-
-	IEnumerator AddDeckRequest(string characterId)
-	{
-		IEnumerator coroutine = HttpRequest.PostRequest(
-			"add_deck.php",
-			new Dictionary<string, string>()
-			{
-				{"user_id", userId.text },
-				{"character_id",characterId}
-			});
-		yield return StartCoroutine(coroutine);
 	}
 
 	void WaitReset()
@@ -40,5 +28,17 @@ public class DeckKeep : MonoBehaviour
 		}
 
 		compositionScreen.SetActive(false);
+	}
+
+	IEnumerator AddDeckRequest(string characterId)
+	{
+		IEnumerator coroutine = HttpRequest.PostRequest(
+			"add_deck.php",
+			new Dictionary<string, string>()
+			{
+				{"user_id", userInfo.data.m_id.ToString()},
+				{"character_id",characterId}
+			});
+		yield return StartCoroutine(coroutine);
 	}
 }

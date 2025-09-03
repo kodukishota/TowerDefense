@@ -12,6 +12,7 @@ TagManager:
   - Blue
   - RedRanged
   - BlueRanged
+  - PlayerTerritory
   layers:
   - Default
   - TransparentFX

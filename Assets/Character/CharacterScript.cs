@@ -19,6 +19,10 @@ public class CharacterScript : MonoBehaviour
 
 	[SerializeField] int m_id;
 
+	[SerializeField] AudioSource DethSe;
+
+	bool m_endAnim;
+
 	public void SetId(int id)
 	{
 		m_id = id;
@@ -72,19 +76,30 @@ public class CharacterScript : MonoBehaviour
 	void Start()
 	{
 		m_hp = characterData.datas[m_id].m_hp;
+
+		m_endAnim = false;
 	}
 
 	void Update()
 	{
-		//Ž€–S‚µ‚½‚Æ‚«
-		if (m_hp <= 0)
+		if(m_id != 0)
 		{
-			gameObject.tag = "Carcass";
+			//Ž€–S‚µ‚½‚Æ‚«
+			if (m_hp <= 0)
+			{
+				gameObject.tag = "Carcass";
 
-			anim.SetTrigger("Deth");
+				if(!m_endAnim)
+				{
+					m_endAnim = true;
+					anim.SetTrigger("Deth");
+					DethSe.Play();
+				}
 
-			Invoke("Deth", 2.0f);
+				Invoke("OnDestroy", 2.0f);
+			}
 		}
+
 	}
 
 	//ƒ_ƒ[ƒW‚ðŽó‚¯‚éˆ—
@@ -93,7 +108,7 @@ public class CharacterScript : MonoBehaviour
 		m_hp -= damage;
 	}
 
-	void Deth()
+	void OnDestroy()
 	{
 		Destroy(gameObject);
 	}

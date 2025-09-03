@@ -22,7 +22,7 @@ public class PackCardView : MonoBehaviour
 			cardCost.text = characterDataBase.datas[id - 1].m_cost.ToString() + "$";
 
 			GameObject cardImage = Instantiate(cardPrefab, parent);
-			cardImage.transform.GetChild(1).GetComponent<Image>().sprite = LoadCardImage.Load(id);
+			cardImage.transform.GetChild(1).GetComponent<Image>().sprite = LoadCardImage.Load(id - 1);
 		}
 	}
 

@@ -44,7 +44,7 @@ public class CardView : MonoBehaviour
 		{
 			if (!m_useIds.Contains(id))
 			{
-				cardPrefab.transform.GetChild(1).GetComponent<Image>().sprite = LoadCardImage.Load(id);
+				cardPrefab.transform.GetChild(1).GetComponent<Image>().sprite = LoadCardImage.Load(id - 1);
 				TextMeshProUGUI cardName = cardPrefab.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
 				TextMeshProUGUI cardCost = cardPrefab.transform.GetChild(4).GetComponent<TextMeshProUGUI>();
 				TextMeshProUGUI cardId = cardPrefab.transform.GetChild(5).GetComponent<TextMeshProUGUI>();

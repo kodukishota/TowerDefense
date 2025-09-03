@@ -24,7 +24,7 @@ MonoBehaviour:
     m_speed: 3
     m_cost: 30
   - m_name: "\u30B4\u30FC\u30EC\u30E0"
-    m_hp: 30
+    m_hp: 50
     m_attackDamage: 10
     m_speed: 0
     m_cost: 50
@@ -33,3 +33,8 @@ MonoBehaviour:
     m_attackDamage: 0
     m_speed: 0
     m_cost: 0
+  - m_name: "\u30AA\u30FC\u30AF"
+    m_hp: 30
+    m_attackDamage: 15
+    m_speed: 5
+    m_cost: 45

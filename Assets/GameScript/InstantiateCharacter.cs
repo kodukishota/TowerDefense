@@ -50,8 +50,8 @@ public class InstantiateCharacter : MonoBehaviour
 	}
 
 	private void Start()
-	{
-		m_text.text = characterDataBase.datas[m_characterId - 1].m_cost + "$";
+	{	
+		m_text.text = characterDataBase.datas[m_characterId].m_cost + "$";
 	}
 
 	private void Update()
@@ -63,21 +63,21 @@ public class InstantiateCharacter : MonoBehaviour
 	}
 
 	//キャラクタの生成
-	public void Instantiate(Vector3 position)
+	public void CharacterInstantiate(Vector3 position)
 	{
 		//お金があったら出せる
-		if(walletScript.GetHaveMoney() >= characterDataBase.datas[m_characterId - 1].m_cost)
+		if(walletScript.GetHaveMoney() >= characterDataBase.datas[m_characterId].m_cost)
 		{
 			GameObject character = Instantiate(m_character, position, Quaternion.Euler(0,-90,0));
 
 			CharacterScript characterScript = character.GetComponent<CharacterScript>();
 
 			characterScript.SetEnemyCastle(m_enemyCastle);
-			characterScript.SetId(m_characterId - 1);
+			characterScript.SetId(m_characterId);
 
 			character.tag = "Blue";
 
-			walletScript.UseMoney(characterDataBase.datas[m_characterId - 1].m_cost);
+			walletScript.UseMoney(characterDataBase.datas[m_characterId].m_cost);
 
 			m_onClick = false;
 		}

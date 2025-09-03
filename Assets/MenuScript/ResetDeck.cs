@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ResetDeck : MonoBehaviour
 {
-	[SerializeField] TMP_InputField userId;
+	[SerializeField] UserInfo userInfo;
 
 	public void OnColick()
 	{
@@ -18,7 +18,7 @@ public class ResetDeck : MonoBehaviour
 			"reset_user_deck.php",
 			new Dictionary<string, string>()
 			{
-			{"user_id", userId.text }
+			{"user_id", userInfo.data.m_id.ToString()}
 			});
 		yield return StartCoroutine(coroutine);
 	}

@@ -17,7 +17,7 @@ public class RangedInfantry : MonoBehaviour
 
 	[SerializeField] private GameObject projectilePrefab;		//矢だったり魔法などのオブジェクト
 
-	[SerializeField] float AttackCooolDown = 5; //攻撃速度
+	[SerializeField] float AttackCooolDown = 8; //攻撃速度
 
 	private GameObject m_enemyCastle;
 	private SearchEnemy m_searchEnemy;
@@ -33,9 +33,9 @@ public class RangedInfantry : MonoBehaviour
 	bool m_isCreated;   //projectilePrefabを生成したか
 	bool m_isHit;		//とび攻撃が敵に当たったか
 
-	bool m_isIdle;
-
 	int m_id;
+
+	bool m_endAnim;
 
 	GameObject m_enemy;
 	GameObject m_projectile;
@@ -53,6 +53,7 @@ public class RangedInfantry : MonoBehaviour
 
 		m_attackDamage = characterDataBase.datas[m_id].m_attackDamage;
 		m_canAttack = false;
+		m_endAnim = false;
 
 		m_enemyCastle = characterScript.GetenemyCastle();
 
@@ -75,8 +76,6 @@ public class RangedInfantry : MonoBehaviour
 			anim.SetTrigger("Walk");
 
 			navMeshAgent.speed = characterDataBase.datas[m_id].m_speed;
-
-			m_isIdle = false;
 		}
 		else
 		{
@@ -90,9 +89,14 @@ public class RangedInfantry : MonoBehaviour
 			if (m_canAttack)
 			{
 				AttackEnemy(m_enemy);
-
-				
 			}
+		}
+
+		//死亡した時動くの止める
+		if(characterScript.GetHelth() <= 0)
+		{
+			navMeshAgent.velocity = Vector3.zero;
+			navMeshAgent.speed = 0;
 		}
 	}
 
@@ -109,8 +113,13 @@ public class RangedInfantry : MonoBehaviour
 
 		if (m_attackCooolDown <= 0)
 		{
-			//攻撃アニメーションを再生
-			anim.SetTrigger("Attack");
+			if(!m_endAnim)
+			{
+				//攻撃アニメーションを再生
+				anim.SetTrigger("Attack");
+
+				m_endAnim = true;
+			}
 
 			//攻撃時の飛びアイテム生成
 			if (!m_isCreated)
@@ -150,6 +159,8 @@ public class RangedInfantry : MonoBehaviour
 		else
 		{
 			anim.SetTrigger("AttackStandby");
+
+			m_endAnim = false;
 		}
 	}
 }

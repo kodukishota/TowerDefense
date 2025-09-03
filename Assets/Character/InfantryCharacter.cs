@@ -27,12 +27,13 @@ public class InfantryCharacter : MonoBehaviour
 
 	int m_id;
 
+	bool m_endAnim;
+
 	GameObject m_enemy;
 
 	void Start()
 	{
-		m_id = characterScript.GetId()
-			;
+		m_id = characterScript.GetId();
 
 		navMeshAgent.speed = characterDataBase.datas[m_id].m_speed;
 
@@ -40,6 +41,7 @@ public class InfantryCharacter : MonoBehaviour
 
 		m_findEnemy = false;
 		m_canAttack = false;
+		m_endAnim = false;
 
 		m_enemyCastle = characterScript.GetenemyCastle();
 	}
@@ -76,6 +78,13 @@ public class InfantryCharacter : MonoBehaviour
 				AttackEnemy(m_enemy);
 			}
 		}
+
+		//‘Ì—Í‚ª‚OˆÈ‰º‚É‚È‚Á‚½‚ç“®‚©‚È‚¢‚æ‚¤‚É‚·‚é
+		if(characterScript.GetHelth() <= 0)
+		{
+			navMeshAgent.velocity = Vector3.zero;
+			navMeshAgent.speed = 0;
+		}
 	}
 
 	//“G‚ÉUŒ‚‚·‚éˆ—
@@ -90,8 +99,13 @@ public class InfantryCharacter : MonoBehaviour
 
 		if (m_attackCooolDown <= 0)
 		{
-			//UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“‚ðÄ¶
-			anim.SetTrigger("Attack");
+			if(!m_endAnim)
+			{
+				//UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“‚ðÄ¶
+				anim.SetTrigger("Attack");
+
+				m_endAnim = true;
+			}
 
 			if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0)
 			{
@@ -103,6 +117,8 @@ public class InfantryCharacter : MonoBehaviour
 		else
 		{
 			anim.SetTrigger("Idle");
+
+			m_endAnim = false;
 		}
 	}
 }

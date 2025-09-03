@@ -12,8 +12,8 @@ public class WalletScript : MonoBehaviour
 
 	float m_increaseCooldown;	//お金を増やすクールダウン
 
-	int m_increaseMoney;	
-	int m_haveMoney;
+	int m_increaseMoney;
+	[SerializeField] int m_haveMoney;
 
 	private void Start()
 	{
