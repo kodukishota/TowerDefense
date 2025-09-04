@@ -8,6 +8,9 @@ public class VictoryOrDefeat : MonoBehaviour
 	[SerializeField] CharacterScript EnemyHelth;
 
 	[SerializeField] AudioSource CrashSe;
+	[SerializeField] AudioSource VectorySe;
+	[SerializeField] AudioSource DefeatSe;
+
 	[SerializeField] private GameObject BomdEffect;
 
 	[SerializeField] Transform[] CastlePosition;
@@ -41,16 +44,19 @@ public class VictoryOrDefeat : MonoBehaviour
 			}
 
 			Invoke("OpenVectoryScereen", 1.0f);
+			
 		}
     }
 
 	void OpenVectoryScereen()
 	{
+		VectorySe.Play();
 		Screen[0].SetActive(true);
 	}
 
 	void OpenDefeatScreen()
 	{
+		DefeatSe.Play();
 		Screen[1].SetActive(true);
 	}
 }

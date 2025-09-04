@@ -16,7 +16,6 @@ public class InfantryCharacter : MonoBehaviour
 	private SearchEnemy m_searchEnemy;
 	private CanAttackEnemy m_canAttackEnemy;	
 
-	[SerializeField] float AttackCooolDown = 3;	//UŒ‚‘¬“x
 
 	bool m_findEnemy;           //“G‚ğŒ©‚Â‚¯‚½‚©
 
@@ -38,6 +37,7 @@ public class InfantryCharacter : MonoBehaviour
 		navMeshAgent.speed = characterDataBase.datas[m_id].m_speed;
 
 		m_attackDamage = characterDataBase.datas[m_id].m_attackDamage;
+		m_attackCooolDown = characterDataBase.datas[m_id].m_attackSpeed;
 
 		m_findEnemy = false;
 		m_canAttack = false;
@@ -111,7 +111,7 @@ public class InfantryCharacter : MonoBehaviour
 			{
 				//‘Ì—Í‚ğŒ¸‚ç‚·
 				characterScript.HitDamege(m_attackDamage);
-				m_attackCooolDown = AttackCooolDown;
+				m_attackCooolDown = characterDataBase.datas[m_id].m_attackSpeed;
 			}
 		}
 		else

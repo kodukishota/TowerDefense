@@ -16,14 +16,16 @@ public class CharacterDataBase : ScriptableObject
 		public int m_hp;
 		public int m_attackDamage;
 		public int m_speed;
+		public int m_attackSpeed;
 		public int m_cost;
 
-		public void SetStatus(string name,int hp, int atk,int speed,int cost)
+		public void SetStatus(string name,int hp, int atk,int speed,int attackSpeed,int cost)
 		{
 			m_name = name;
 			m_hp = hp;
 			m_attackDamage = atk;
 			m_speed = speed;
+			m_attackSpeed = attackSpeed;
 			m_cost = cost;
 		}
 	}

@@ -54,6 +54,23 @@ public class SearchEnemy : MonoBehaviour
 				m_enemy = null;
 			}
 		}
+	}
 
+	private void OnTriggerExit(Collider other)
+	{
+		if (m_characterScript.GetCharacter().tag == "Red")
+		{
+			if (other.CompareTag("Blue"))
+			{
+				m_findEnemy = false;
+			}
+		}
+		else if (m_characterScript.GetCharacter().tag == "Blue")
+		{
+			if (other.CompareTag("Red"))
+			{
+				m_findEnemy = false;
+			}
+		}
 	}
 }

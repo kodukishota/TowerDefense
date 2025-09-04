@@ -251,7 +251,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 783808311643240053}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.76, y: 0.7, z: 0.78}
@@ -332,7 +332,6 @@ MonoBehaviour:
   characterScript: {fileID: 441858884341772626}
   navMeshAgent: {fileID: 441858884341772622}
   characterDataBase: {fileID: 11400000, guid: 4f412c672f460d04997b4cbd1f7f0363, type: 2}
-  AttackCooolDown: 3
 --- !u!82 &8987079332729461949
 AudioSource:
   m_ObjectHideFlags: 0

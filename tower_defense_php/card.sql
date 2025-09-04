@@ -1,0 +1,8 @@
+CREATE TABLE `card` (
+    `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `user_id` INT UNSIGNED NOT NULL,
+    `character_id` INT UNSIGNED NOT NULL,
+    `created` DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    INDEX user_id_idx(user_id)
+);

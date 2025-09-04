@@ -14,6 +14,7 @@ public class LoadCharacterData : MonoBehaviour
 		public int hp;
 		public int atk;
 		public int speed;
+		public int attackSpeed;
 		public int cost;
 	}
 
@@ -42,6 +43,7 @@ public class LoadCharacterData : MonoBehaviour
 			result.hp,
 			result.atk,
 			result.speed,
+			result.attackSpeed,
 			result.cost
 			);
 	}

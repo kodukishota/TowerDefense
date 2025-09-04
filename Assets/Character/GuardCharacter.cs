@@ -12,8 +12,6 @@ public class GuardCharacter : MonoBehaviour
 	private SearchEnemy m_searchEnemy;
 	private CanAttackEnemy m_canAttackEnemy;
 
-	[SerializeField] float AttackCooolDown = 6; //UŒ‚‘¬“x•b”
-
 	int m_attackDamage;     //UŒ‚—Í
 
 	bool m_findEnemy;           //“G‚ğŒ©‚Â‚¯‚½‚©
@@ -31,7 +29,7 @@ public class GuardCharacter : MonoBehaviour
 		m_id = characterScript.GetId();
 
 		m_attackDamage = characterDataBase.datas[m_id].m_attackDamage;
-		m_attackCooolDown = AttackCooolDown;
+		m_attackCooolDown = characterDataBase.datas[m_id].m_attackSpeed;
 
 		m_endAnim = false;
 	}
@@ -85,7 +83,7 @@ public class GuardCharacter : MonoBehaviour
 			{
 				//‘Ì—Í‚ğŒ¸‚ç‚·
 				characterScript.HitDamege(m_attackDamage);
-				m_attackCooolDown = AttackCooolDown;
+				m_attackCooolDown = characterDataBase.datas[m_id].m_attackSpeed;
 			}
 		}
 		else

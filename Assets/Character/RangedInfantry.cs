@@ -17,8 +17,6 @@ public class RangedInfantry : MonoBehaviour
 
 	[SerializeField] private GameObject projectilePrefab;		//矢だったり魔法などのオブジェクト
 
-	[SerializeField] float AttackCooolDown = 8; //攻撃速度
-
 	private GameObject m_enemyCastle;
 	private SearchEnemy m_searchEnemy;
 	private CanAttackEnemy m_canAttackEnemy;
@@ -30,20 +28,12 @@ public class RangedInfantry : MonoBehaviour
 	bool m_canAttack;           //敵を攻撃することができるか
 	float m_attackCooolDown;    //攻撃速度
 
-	bool m_isCreated;   //projectilePrefabを生成したか
-	bool m_isHit;		//とび攻撃が敵に当たったか
-
 	int m_id;
 
 	bool m_endAnim;
 
 	GameObject m_enemy;
 	GameObject m_projectile;
-
-	public void SetHitEnemy()
-	{
-		m_isHit = true;
-	}
 
 	void Start()
 	{
@@ -57,7 +47,7 @@ public class RangedInfantry : MonoBehaviour
 
 		m_enemyCastle = characterScript.GetenemyCastle();
 
-		m_attackCooolDown = AttackCooolDown;
+		m_attackCooolDown = characterDataBase.datas[m_id].m_attackSpeed;
 	}
 
 	void Update()
@@ -121,40 +111,14 @@ public class RangedInfantry : MonoBehaviour
 				m_endAnim = true;
 			}
 
-			//攻撃時の飛びアイテム生成
-			if (!m_isCreated)
-			{
-				m_projectile = Instantiate(
-					projectilePrefab,
-					new Vector3(m_enemy.transform.position.x, m_enemy.transform.position.y + 3, m_enemy.transform.position.z),
-					Quaternion.identity);
+			Instantiate(projectilePrefab,
+				new Vector3(m_enemy.transform.position.x, m_enemy.transform.position.y + 3, m_enemy.transform.position.z),
+				Quaternion.identity);
 
-				Projectile projectile = m_projectile.GetComponent<Projectile>();
+			//体力を減らす
+			characterScript.HitDamege(m_attackDamage);
 
-				projectile.SetRangedInfantry(this);
-				projectile.SetSearchEnemy(m_searchEnemy);
-
-				if (this.gameObject.tag == "Red")
-				{
-					m_projectile.tag = "RedRanged";
-				}
-				else
-				{
-					m_projectile.tag = "BlueRanged";
-				}
-
-				m_isCreated = true;
-			}
-
-			if(m_isHit)
-			{
-				m_isCreated = false;
-
-				//体力を減らす
-				characterScript.HitDamege(m_attackDamage);
-
-				m_attackCooolDown = AttackCooolDown;				
-			}	
+			m_attackCooolDown = characterDataBase.datas[m_id].m_attackSpeed;
 		}
 		else
 		{

@@ -99,7 +99,19 @@ public class CharacterScript : MonoBehaviour
 				Invoke("OnDestroy", 2.0f);
 			}
 		}
+		else
+		{
+			//Ž€–S‚µ‚½‚Æ‚«
+			if (m_hp <= 0)
+			{
+				if (!m_endAnim)
+				{
+					m_endAnim = true;
 
+					DethSe.Play();
+				}
+			}
+		}
 	}
 
 	//ƒ_ƒ[ƒW‚ðŽó‚¯‚éˆ—

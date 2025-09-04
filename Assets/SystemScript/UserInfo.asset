@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: UserInfo
   m_EditorClassIdentifier: 
   data:
-    m_id: 1
+    m_id: 0
     m_name: 

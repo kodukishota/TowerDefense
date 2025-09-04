@@ -1,0 +1,5 @@
+CREATE TABLE `user_deck` (
+    `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `user_id` INT UNSIGNED NOT NULL,
+    `in_deck_card` INT UNSIGNED NOT NULL DEFAULT 0
+);
